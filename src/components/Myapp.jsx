@@ -1,19 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cloud from "../assets/clouds.webp"
 import clear from "../assets/clear weather.webp"
 import error from "../assets/error.jpg"
 import mist from "../assets/mist.webp"
 import rain from "../assets/rain.webp"
 const Myapp = () => {
-          const [input,setinput]=useState("");
+          const [input,setinput]=useState("Faridabad");
           const [data,setdata] = useState()
           const [err,seterr] = useState()
           const Api = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
           const Apikey = "60e99ec5d39b3a0bc6e3589b00d93864";
-          const handleinput=(e)=>{
-               setinput(e)
-               console.log(e)
-          }
+        
+           const handleinput=(e)=>{
+                setinput(e)
+           }
+               
+          
+          
           const search=async()=>{
            const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${Apikey}&units=metric`)
            const result =await data.json();
@@ -47,7 +50,7 @@ const Myapp = () => {
   };
   return (
     <div className='w-[100%] h-[100vh] flex  flex-col   bg-gray-400 justify-center items-center'>
-      <div className='w-[50%] h-[70%] border flex flex-col justify-center rounded-3xl bg-[#def5de]'>
+      <div className='w-[90%] h-[70%] border flex flex-col justify-center rounded-3xl bg-[#def5de] md:w-[600px]'>
          <div className='flex justify-center  w-full mt-2'>
 <input type="text" placeholder='enter city...' className='border p-3 rounded-3xl rounded-r-none w-[50%] bg-white' value={input} onChange={(e)=>handleinput(e.target.value)}/>
 <button className='border p-3 rounded-3xl rounded-l-none bg-[aqua]'onClick={search}>Search</button>
